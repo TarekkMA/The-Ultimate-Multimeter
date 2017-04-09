@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">The Ultimate Multimeter</string>
+    <string name="title_display">Display</string>
+    <string name="title_book">Experiments Book</string>
+    <string name="title_about">About</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_display_volt">Voltage</string>
+</resources>
