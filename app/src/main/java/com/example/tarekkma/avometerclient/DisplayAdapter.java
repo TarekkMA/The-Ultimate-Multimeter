@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tarekkma.avometerclient.data.DisplayData;
+import com.example.tarekkma.avometerclient.data.MeasureUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.VH> {
     @Override
     public void onBindViewHolder(final VH holder, int position) {
         DisplayData item = dataList.get(position);
-        holder.valueTV.setText(String.valueOf(item.getValue()));
+        holder.valueTV.setText(String.format("%.3f",item.getValue()));
         holder.infoTV.setText(item.getUnit().symbol+"\n"+item.getUnit().multiplier.symbol+item.getUnit().unit);
         holder.change.setOnClickListener(new View.OnClickListener() {
             @Override

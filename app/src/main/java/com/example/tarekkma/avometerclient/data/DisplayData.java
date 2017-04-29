@@ -18,11 +18,10 @@ public class DisplayData {
     private String name;
     private MeasureUnit unit;
 
+
     @Nullable
     public static DisplayData create(String key, double value){
         DisplayData data = new DisplayData();
-        data.setKey(key);
-        data.setValue(value);
         MeasureUnit unit;
         switch (key){
             case "vdc":
@@ -31,12 +30,22 @@ public class DisplayData {
             case "vac":
                 unit = new MeasureUnit("DC Volt","DC V","V",MeasureUnit.NORMAL);
                 break;
-            case "r":
-                unit = new MeasureUnit("Ohm","R","Ω",MeasureUnit.KILO);
-                break;
-            case "i":
-                unit = new MeasureUnit("Ampere","I","A",MeasureUnit.NORMAL);
-                break;
+            case "r":{
+                Multiplier m = MeasureUnit.NORMAL;
+                if(value>1000){
+                    value/=1000;
+                    m = MeasureUnit.KILO;
+                }
+                unit = new MeasureUnit("Ohm","R","Ω",m);
+                break;}
+            case "i":{
+                Multiplier m = MeasureUnit.NORMAL;
+                if(value<1){
+                    value*=1000;
+                    m = MeasureUnit.MILLI;
+                }
+                unit = new MeasureUnit("Ampere","I","A",m);
+                break;}
             case "c":
                 unit = new MeasureUnit("Capacitance","C","F",MeasureUnit.MICRO);
                 break;
@@ -44,6 +53,8 @@ public class DisplayData {
                 Log.e(TAG, "DisplayData: Key :'"+key+"' doesn't match any defined keys.");
                 return null;
         }
+        data.setKey(key);
+        data.setValue(value);
         data.setUnit(unit);
         return data;
     }

@@ -151,8 +151,8 @@ public class DisplayFragment extends Fragment {
                     double value;
                     try {
                         value = Double.parseDouble(keyValue[1]);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        //e.printStackTrace();
                         value = 0;
                     }
                     DisplayData item = DisplayData.create(key,value);
@@ -167,19 +167,6 @@ public class DisplayFragment extends Fragment {
         });
 
         return parentView;
-    }
-
-    public void sendData(View v){
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-    }
-
-    private void setup(){
-
     }
 
     private void connectToDevice(){
@@ -227,7 +214,7 @@ public class DisplayFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK && data.getExtras()!=null)
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER);
-                bt.connect(data);
+                if(data!=null) bt.connect(data);
         } else if(requestCode == REQUEST_ENABLE_BT) {
             if(resultCode == Activity.RESULT_OK) {
                 bt.setupService();
