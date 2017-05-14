@@ -8,4 +8,6 @@
     <color name="background_display">#C5C5B9</color>
     <color name="color_text_display">#000</color>
 
+    <color name="bg">#303030</color>
+
 </resources>
